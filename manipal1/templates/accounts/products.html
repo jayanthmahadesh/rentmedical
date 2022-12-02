@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
+
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/products.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="heading">
+        <div class="bullet">
+            <img src="/static/images/bullet.png" alt="">
+
+        </div>
+        <div class="bullet">
+            <img src="/static/images/bullet.png" alt="here">
+
+        </div>
+<div id="title">Monitoring</div>
+    </div>
+
+    <div class="rental">
+  
+       
+    
+     <div class="productstype">
+        {% for subpro in subpros %}
+         <a href="./details/{{subpro.uniqueproductid}}" class="one">
+             <img src="{{subpro.productimage.url}}" alt="image here ">
+             <div class="text">{{subpro.productname}}
+                 </div>
+                </a>
+             
+                {% endfor %}
+     </div>
+          
+ 
+ </div>
+ 
+    
+</body>
+</html>
+
+
+
+
+
+
+
+{% comment %} <div class="productstype">
+
+    <div class="row">
+        {% for subpro in subpros %}
+        <a href="#" class="one">
+
+                <div class="text">{{subpro.productname}}</div>
+            
+        </a>
+        {% endfor %}
+    </div>
+</div> {% endcomment %}

@@ -1,0 +1,17 @@
+login page
+<form method="POST" action="">
+{%csrf_token%}
+    username 
+    <input type="text" name="username" placeholder="name"> 
+    <br>
+    password 
+    <input type="password" name="password" placeholder="*********">
+<br>
+    <input type="submit" name="submit">
+    <br>
+    {%for message in messages%}
+    {{message}}
+    {% endfor %}
+    <br>
+    dont have an account <a href="./register">register</a>
+</form>
