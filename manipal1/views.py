@@ -42,6 +42,13 @@ def login(request):
                 user = authenticate(request,username=username,password=password)
                 if(user is not None):
                         auth_login(request,user)
+                        request.session['userid'] = user.id
+                        request.session['useremail'] = user.email
+                        print(user.email)
+                        print(user.id)
+
+
+
                         return redirect('/')
                 else:
                         messages.info(request,'username or password is incorrect')
@@ -70,3 +77,9 @@ def details(request,uniqueproid):
     
     
      return render(request,'accounts/details.html',context)
+def order(request,uniqueproid):
+    product = subproducts.objects.filter(uniqueproductid=uniqueproid)
+    context ={
+         'pros':product
+    }
+    return render(request,'accounts/orderform.html',context)
