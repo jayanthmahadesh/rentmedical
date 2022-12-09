@@ -17,6 +17,15 @@ class subproducts(models.Model):
     
     def __str__(self):
         return self.productname
+class ord(models.Model):
+    productname = models.CharField(max_length=100)
+    userid = models.CharField(max_length=10)
+    quantity = models.CharField(max_length=10)
+    username = models.CharField(max_length=100)
+    email = models.CharField(max_length=100)
+    def __str__(self):
+        return self.username
+    
 # class product(models.Model):
 #     # productname = subproducts.productname
 #     description = models.CharField(max_length = 5000)

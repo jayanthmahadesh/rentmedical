@@ -1,9 +1,9 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm
-from .templates.forms import createuserform
+from .templates.forms import createuserform, orderform
 from django.contrib.auth import authenticate,login as auth_login,logout
 # Create your views here.
-from .models import category,subproducts
+from .models import category,subproducts,ord
 from django.contrib import messages
 from django.http import HttpResponse
 
@@ -44,11 +44,11 @@ def login(request):
                         auth_login(request,user)
                         request.session['userid'] = user.id
                         request.session['useremail'] = user.email
-                        print(user.email)
-                        print(user.id)
-
-
-
+                        request.session['username']=user.username
+                        # print(user.email)
+                        # print(user.id)
+                        # print("here")
+                        # print(user.username)
                         return redirect('/')
                 else:
                         messages.info(request,'username or password is incorrect')
@@ -57,13 +57,20 @@ def login(request):
             return render(request,'accounts/login.html',context)
 def logoutuser(request):
     logout(request)
+    request.session.flush()
     return redirect('login')
 
 def products(request,productid):
 
     subpros = subproducts.objects.filter(subproductskey=productid)
+    pros = category.objects.filter(productkey=subpros[0].subproductskey)
+    
+    print("here",pros)
+
+
     context={
-        'subpros':subpros
+        'subpros':subpros,
+        'pp':pros
     }
 
     return render(request,'accounts/products.html',context)
@@ -74,12 +81,45 @@ def details(request,uniqueproid):
      context={
           'pros':displaypro
      }
-    
-    
      return render(request,'accounts/details.html',context)
 def order(request,uniqueproid):
+
     product = subproducts.objects.filter(uniqueproductid=uniqueproid)
+    productname=product[0].productname
+
     context ={
-         'pros':product
+         'productname':productname,
+         'username':request.session['username'],
+         'email':request.session['useremail'],
+         'userid':request.session['userid']
     }
+
     return render(request,'accounts/orderform.html',context)
+
+
+# def ordersubmit(request):
+
+#     userid = request.session['userid']
+#     username=request.session['username']
+#     quantity = request.POST.get('quantity')
+#     productname = request.POST.get('productname')
+    
+#     return redirect('/')
+
+def ordersubmit(request):
+    form= orderform(request.POST)
+    print("here1")
+    if form.is_valid():
+        print("here2")
+        form.save()
+  
+    context= {'form': form }
+        
+    return redirect('/')
+def showorder(request):
+     o = ord.objects.filter(userid=request.session['userid'])
+     context={
+          'ords':o
+          
+     }
+     return render(request,'accounts/orders.html',context)

@@ -2,3 +2,14 @@ orderform
 {%for pro in pros%}
 {{pro.productname}}
 {%endfor%}
+
+<form action="ordersubmit" method="post">
+    {% csrf_token %}
+   username     :    <input type="text" value="{{username}}" name="username"><br>
+   product name : <input type="text" value="{{productname}}" size="50" name="productname"><br>
+   email        :  <input type="text" value="{{email}}" name="email"><br>
+   quantity     :  <input type="number" placeholder="eg 2" name="quantity" value="1" ><br>
+    <input type="text" value="{{userid}}" name="userid">
+    <input type="submit" value="submit">
+    
+</form>

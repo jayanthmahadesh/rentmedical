@@ -20,7 +20,9 @@
             <img src="/static/images/bullet.png" alt="here">
 
         </div>
-<div id="title">Monitoring</div>
+        {%for p in pp%}
+<div id="title">{{p.title}}</div>
+{% endfor%}
     </div>
 
     <div class="rental">

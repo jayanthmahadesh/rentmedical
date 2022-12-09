@@ -30,15 +30,26 @@
     <div class="navbar">
 
 
-        <li class="navleft"><img id="favicon" src="/static/images/favicon.jpeg" alt="Italian Trulli"></li>
+        <li class="navleft"><img id="favicon" src="/static/images/favicon.png" alt="Italian Trulli"></li>
         <ul id="nav" class="navright">
-
+          
             <li><a href="#home">Home <i class="fa-solid fa-house"></i></a></li>
             <li><a href="#statistics">Statistics <i class="fa-solid fa-list-ol"></i></a></li>
             <li><a href="#rental">Rental <i class="fa-solid fa-cart-plus"></i></a></li>
             <li><a href="#contact">Contact <i class="fa-solid fa-phone"></i></a></li>
             
-            
+            {% if not user.is_authenticated %}
+            <li><a href="login">login </i></a></li>
+            <li><a href="register">register </i></a></li>
+
+
+{% endif %}
+{% if user.is_authenticated %}
+<li><a href="orders">orders </i></a></li>
+<li><a href="logout">logout </i></a></li>
+
+
+{% endif %}
         </ul>
 
 
@@ -147,13 +158,13 @@
         <div id="text-1">
             Get in Touch
         </div>
-        <!--            <div class="one">-->
-        <!--                <img src="/static/images/contact-left-1.png" alt="">-->
-        <!--                <div id="text">abcdzyx3456@gmail.com</div>-->
-        <!--            </div>-->
+             <div class="one">
+                   <img src="/static/images/contact-left-1.png" alt="">
+                     <div id="text">abcdzyx3456@gmail.com</div>
+                   </div>
         <div class="one">
             <img src="/static/images/contact-left-2.png" alt="">
-            <div id="text">8884301577</div>
+            <div id="text">9191919191</div>
         </div>
         <div id="social">
             <a href="https://twitter.com/i/flow/login"><img src="/static/images/contact-left-3.png" alt=""></a>
